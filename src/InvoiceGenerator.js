@@ -920,12 +920,6 @@ const splitItemsIntoPages = (items, itemsPerPage) => {
 };
 
 
-
-
-
-
-
-
 // Previous imports remain the same...
 
 const InvoicePDF = ({ data, summary }) => {
@@ -1115,10 +1109,6 @@ const InvoicePDF = ({ data, summary }) => {
   );
 };
 
-// Rest of the code (InvoiceGenerator component and styles) remains the same...
-
-
-
 
 
 
@@ -1206,3 +1196,118 @@ const InvoiceGenerator = () => {
 };
 
 export default InvoiceGenerator;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
