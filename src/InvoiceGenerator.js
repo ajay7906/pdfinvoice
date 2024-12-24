@@ -918,50 +918,254 @@ const splitItemsIntoPages = (items, itemsPerPage) => {
   return pages;
 };
 
+
+
+
+
+
+// const InvoicePDF = ({ data, summary }) => {
+//   const ITEMS_PER_PAGE = 15;
+//   const pages = splitItemsIntoPages(data, ITEMS_PER_PAGE);
+
+//   return (
+//     <Document>
+//       {pages.map((pageItems, pageIndex) => (
+//         <Page key={pageIndex} size="A4" style={styles.page}>
+//           {pageIndex === 0 && (
+//             <>
+//               <View style={styles.header}>
+//                 <Text style={styles.logo}>MONO PVT .</Text>
+//               </View>
+
+//               <View>
+//                 <Text style={styles.Number}>Invoice No: 12345678</Text>
+//               </View>
+
+//               <Text style={styles.title}>INVOICE</Text>
+
+//               <View style={styles.invoiceDetailsContainer}>
+//                 <View style={styles.invoiceCard}>
+//                   <Text>Date:</Text>
+//                   <Text>15 March 2020</Text>
+//                 </View>
+//                 <View style={styles.invoiceCard}>
+//                   <Text>Total Due: $1500.00</Text>
+//                 </View>
+//                 <View style={styles.invoiceCard}>
+//                   <Text>Account No: 5544526</Text>
+//                 </View>
+//               </View>
+
+//               <View style={styles.clientInfo}>
+//                 <Text>Invoice To:</Text>
+//                 <Text>Vision Tech LTD</Text>
+//                 <Text>123 Street, Town/City, State, County 556</Text>
+//                 <Text>Mobile: 55 456 789-888</Text>
+//                 <Text>Email: info@companyname.com</Text>
+//               </View>
+//               <View style={styles.divide} />
+//             </>
+//           )}
+
+//           <View style={styles.table}>
+//             <View style={styles.tableHeader}>
+//               <Text style={styles.tableCellLeft}>ITEM DESCRIPTION</Text>
+//               <Text style={styles.tableCell}>UNIT PRICE</Text>
+//               <Text style={styles.tableCell}>QTY</Text>
+//               <Text style={styles.tableCell}>TOTAL</Text>
+//             </View>
+
+//             {pageItems.map((item, index) => (
+//               <View
+//                 key={index}
+//                 style={[
+//                   styles.tableRow,
+//                   index % 2 === 0 && { backgroundColor: "#f9fafb" },
+//                 ]}
+//               >
+//                 <Text style={styles.tableCellLeft}>{item.description}</Text>
+//                 <Text style={styles.tableCell}>{item.unitPrice}</Text>
+//                 <Text style={styles.tableCell}>{item.qty}</Text>
+//                 <Text style={styles.tableCell}>{item.total}</Text>
+//               </View>
+//             ))}
+//           </View>
+
+//           {pageIndex === pages.length - 1 && (
+//             <>
+//               <View style={styles.summary}>
+//                 <View style={styles.row}>
+//                   <Text style={styles.label}>Sub Total:</Text>
+//                   <Text style={styles.value}>${summary.subTotal}</Text>
+//                 </View>
+//                 <View style={styles.row}>
+//                   <Text style={styles.label}>Tax (10%):</Text>
+//                   <Text style={styles.value}>${summary.tax}</Text>
+//                 </View>
+//                 <View style={styles.divider} />
+//                 <View style={styles.row}>
+//                   <Text style={styles.label}>Grand Total:</Text>
+//                   <Text style={styles.value}>${summary.grandTotal}</Text>
+//                 </View>
+//               </View>
+
+//               <View style={styles.container}>
+//                 <Text style={styles.heading}>PAYMENT METHODS</Text>
+//                 <Text style={styles.text}>
+//                   <Text style={styles.bold}>Paypal: </Text>
+//                   <Text style={styles.normal}>paypal@company.com Card</Text>
+//                 </Text>
+//                 <Text style={styles.text}>
+//                   <Text style={styles.bold}>Card Payment: </Text>
+//                   <Text style={styles.normal}>Visa, Master Card</Text>
+//                 </Text>
+//                 <Text style={styles.text}>
+//                   <Text style={styles.normal}>We accept Cheque</Text>
+//                 </Text>
+//               </View>
+
+//               <View style={styles.dividefooter} />
+
+//               <View style={styles.footer}>
+//                 <Text style={styles.thankYouText}>THANK YOU FOR YOUR BUSINESS</Text>
+//                 <Text style={styles.termsText}>
+//                   TERMS: Contrary to popular belief, Lorem Ipsum is not simply random text.
+//                 </Text>
+//               </View>
+//             </>
+//           )}
+          
+//           <Text style={styles.pageNumber}>
+//             Page {pageIndex + 1} of {pages.length}
+//           </Text>
+//         </Page>
+//       ))}
+//     </Document>
+//   );
+// };
+
+
+
+
+// Previous imports remain the same...
+
 const InvoicePDF = ({ data, summary }) => {
-  const ITEMS_PER_PAGE = 15;
-  const pages = splitItemsIntoPages(data, ITEMS_PER_PAGE);
+  const ITEMS_PER_PAGE = data.length <= 12 ? data.length : 12; // Adjust items per page dynamically
+  const firstPageItems = data.slice(0, ITEMS_PER_PAGE);
+  const remainingItems = data.slice(ITEMS_PER_PAGE);
+  const hasMultiplePages = remainingItems.length > 0;
 
   return (
     <Document>
-      {pages.map((pageItems, pageIndex) => (
-        <Page key={pageIndex} size="A4" style={styles.page}>
-          {pageIndex === 0 && (
-            <>
-              <View style={styles.header}>
-                <Text style={styles.logo}>MONO PVT .</Text>
+      {/* First Page */}
+      <Page size="A4" style={styles.page}>
+        <View style={styles.header}>
+          <Text style={styles.logo}>MONO PVT .</Text>
+        </View>
+
+        <View>
+          <Text style={styles.Number}>Invoice No: 12345678</Text>
+        </View>
+
+        <Text style={styles.title}>INVOICE</Text>
+
+        <View style={styles.invoiceDetailsContainer}>
+          <View style={styles.invoiceCard}>
+            <Text>Date:</Text>
+            <Text>15 March 2020</Text>
+          </View>
+          <View style={styles.invoiceCard}>
+            <Text>Total Due: $1500.00</Text>
+          </View>
+          <View style={styles.invoiceCard}>
+            <Text>Account No: 5544526</Text>
+          </View>
+        </View>
+
+        <View style={styles.clientInfo}>
+          <Text>Invoice To:</Text>
+          <Text>Vision Tech LTD</Text>
+          <Text>123 Street, Town/City, State, County 556</Text>
+          <Text>Mobile: 55 456 789-888</Text>
+          <Text>Email: info@companyname.com</Text>
+        </View>
+        <View style={styles.divide} />
+
+        <View style={styles.table}>
+          <View style={styles.tableHeader}>
+            <Text style={styles.tableCellLeft}>ITEM DESCRIPTION</Text>
+            <Text style={styles.tableCell}>UNIT PRICE</Text>
+            <Text style={styles.tableCell}>QTY</Text>
+            <Text style={styles.tableCell}>TOTAL</Text>
+          </View>
+
+          {firstPageItems.map((item, index) => (
+            <View
+              key={index}
+              style={[
+                styles.tableRow,
+                index % 2 === 0 && { backgroundColor: "#f9fafb" },
+              ]}
+            >
+              <Text style={styles.tableCellLeft}>{item.description}</Text>
+              <Text style={styles.tableCell}>{item.unitPrice}</Text>
+              <Text style={styles.tableCell}>{item.qty}</Text>
+              <Text style={styles.tableCell}>{item.total}</Text>
+            </View>
+          ))}
+        </View>
+
+        {!hasMultiplePages && (
+          <>
+            <View style={styles.summary}>
+              <View style={styles.row}>
+                <Text style={styles.label}>Sub Total:</Text>
+                <Text style={styles.value}>${summary.subTotal}</Text>
               </View>
-
-              <View>
-                <Text style={styles.Number}>Invoice No: 12345678</Text>
+              <View style={styles.row}>
+                <Text style={styles.label}>Tax (10%):</Text>
+                <Text style={styles.value}>${summary.tax}</Text>
               </View>
-
-              <Text style={styles.title}>INVOICE</Text>
-
-              <View style={styles.invoiceDetailsContainer}>
-                <View style={styles.invoiceCard}>
-                  <Text>Date:</Text>
-                  <Text>15 March 2020</Text>
-                </View>
-                <View style={styles.invoiceCard}>
-                  <Text>Total Due: $1500.00</Text>
-                </View>
-                <View style={styles.invoiceCard}>
-                  <Text>Account No: 5544526</Text>
-                </View>
+              <View style={styles.divider} />
+              <View style={styles.row}>
+                <Text style={styles.label}>Grand Total:</Text>
+                <Text style={styles.value}>${summary.grandTotal}</Text>
               </View>
+            </View>
 
-              <View style={styles.clientInfo}>
-                <Text>Invoice To:</Text>
-                <Text>Vision Tech LTD</Text>
-                <Text>123 Street, Town/City, State, County 556</Text>
-                <Text>Mobile: 55 456 789-888</Text>
-                <Text>Email: info@companyname.com</Text>
-              </View>
-              <View style={styles.divide} />
-            </>
-          )}
+            <View style={styles.container}>
+              <Text style={styles.heading}>PAYMENT METHODS</Text>
+              <Text style={styles.text}>
+                <Text style={styles.bold}>Paypal: </Text>
+                <Text style={styles.normal}>paypal@company.com Card</Text>
+              </Text>
+              <Text style={styles.text}>
+                <Text style={styles.bold}>Card Payment: </Text>
+                <Text style={styles.normal}>Visa, Master Card</Text>
+              </Text>
+              <Text style={styles.text}>
+                <Text style={styles.normal}>We accept Cheque</Text>
+              </Text>
+            </View>
 
+            <View style={styles.dividefooter} />
+            <View style={styles.footer}>
+              <Text style={styles.thankYouText}>THANK YOU FOR YOUR BUSINESS</Text>
+              <Text style={styles.termsText}>
+                TERMS: Contrary to popular belief, Lorem Ipsum is not simply random text.
+              </Text>
+            </View>
+          </>
+        )}
+        
+        <Text style={styles.pageNumber}>
+          Page 1 {hasMultiplePages ? `of 2` : `of 1`}
+        </Text>
+      </Page>
+
+      {/* Second Page (if needed) */}
+      {hasMultiplePages && (
+        <Page size="A4" style={styles.page}>
           <View style={styles.table}>
             <View style={styles.tableHeader}>
               <Text style={styles.tableCellLeft}>ITEM DESCRIPTION</Text>
@@ -970,7 +1174,7 @@ const InvoicePDF = ({ data, summary }) => {
               <Text style={styles.tableCell}>TOTAL</Text>
             </View>
 
-            {pageItems.map((item, index) => (
+            {remainingItems.map((item, index) => (
               <View
                 key={index}
                 style={[
@@ -986,58 +1190,99 @@ const InvoicePDF = ({ data, summary }) => {
             ))}
           </View>
 
-          {pageIndex === pages.length - 1 && (
-            <>
-              <View style={styles.summary}>
-                <View style={styles.row}>
-                  <Text style={styles.label}>Sub Total:</Text>
-                  <Text style={styles.value}>${summary.subTotal}</Text>
-                </View>
-                <View style={styles.row}>
-                  <Text style={styles.label}>Tax (10%):</Text>
-                  <Text style={styles.value}>${summary.tax}</Text>
-                </View>
-                <View style={styles.divider} />
-                <View style={styles.row}>
-                  <Text style={styles.label}>Grand Total:</Text>
-                  <Text style={styles.value}>${summary.grandTotal}</Text>
-                </View>
-              </View>
+          <View style={styles.summary}>
+            <View style={styles.row}>
+              <Text style={styles.label}>Sub Total:</Text>
+              <Text style={styles.value}>${summary.subTotal}</Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>Tax (10%):</Text>
+              <Text style={styles.value}>${summary.tax}</Text>
+            </View>
+            <View style={styles.divider} />
+            <View style={styles.row}>
+              <Text style={styles.label}>Grand Total:</Text>
+              <Text style={styles.value}>${summary.grandTotal}</Text>
+            </View>
+          </View>
 
-              <View style={styles.container}>
-                <Text style={styles.heading}>PAYMENT METHODS</Text>
-                <Text style={styles.text}>
-                  <Text style={styles.bold}>Paypal: </Text>
-                  <Text style={styles.normal}>paypal@company.com Card</Text>
-                </Text>
-                <Text style={styles.text}>
-                  <Text style={styles.bold}>Card Payment: </Text>
-                  <Text style={styles.normal}>Visa, Master Card</Text>
-                </Text>
-                <Text style={styles.text}>
-                  <Text style={styles.normal}>We accept Cheque</Text>
-                </Text>
-              </View>
+          <View style={styles.container}>
+            <Text style={styles.heading}>PAYMENT METHODS</Text>
+            <Text style={styles.text}>
+              <Text style={styles.bold}>Paypal: </Text>
+              <Text style={styles.normal}>paypal@company.com Card</Text>
+            </Text>
+            <Text style={styles.text}>
+              <Text style={styles.bold}>Card Payment: </Text>
+              <Text style={styles.normal}>Visa, Master Card</Text>
+            </Text>
+            <Text style={styles.text}>
+              <Text style={styles.normal}>We accept Cheque</Text>
+            </Text>
+          </View>
 
-              <View style={styles.dividefooter} />
-
-              <View style={styles.footer}>
-                <Text style={styles.thankYouText}>THANK YOU FOR YOUR BUSINESS</Text>
-                <Text style={styles.termsText}>
-                  TERMS: Contrary to popular belief, Lorem Ipsum is not simply random text.
-                </Text>
-              </View>
-            </>
-          )}
+          <View style={styles.dividefooter} />
+          <View style={styles.footer}>
+            <Text style={styles.thankYouText}>THANK YOU FOR YOUR BUSINESS</Text>
+            <Text style={styles.termsText}>
+              TERMS: Contrary to popular belief, Lorem Ipsum is not simply random text.
+            </Text>
+          </View>
           
-          <Text style={styles.pageNumber}>
-            Page {pageIndex + 1} of {pages.length}
-          </Text>
+          <Text style={styles.pageNumber}>Page 2 of 2</Text>
         </Page>
-      ))}
+      )}
     </Document>
   );
 };
+
+// Rest of the code (InvoiceGenerator component and styles) remains the same...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const InvoiceGenerator = () => {
   const data = [
