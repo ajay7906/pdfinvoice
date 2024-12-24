@@ -292,7 +292,7 @@ const InvoicePDF = ({ data, summary }) => {
               key={index}
               style={[
                 styles.tableRow,
-                index % 2 === 0 && { backgroundColor: "#f9fafb" },
+                index % 2 === 0 && { backgroundColor: "#d1d5db" },
               ]}
             >
               <Text style={styles.tableCellLeft}>{item.description}</Text>
@@ -367,7 +367,7 @@ const InvoicePDF = ({ data, summary }) => {
                 key={index}
                 style={[
                   styles.tableRow,
-                  index % 2 === 0 && { backgroundColor: "#f9fafb" },
+                  index % 2 === 0 && { backgroundColor: "#d1d5db", borderRadius: 6 },
                 ]}
               >
                 <Text style={styles.tableCellLeft}>{item.description}</Text>
