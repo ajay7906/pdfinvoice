@@ -1,5 +1,10 @@
 const styles = StyleSheet.create({
     // ... previous styles remain same ...
+
+
+
+
+
     summary: {
       fontSize: 10,
       marginTop: 20,
@@ -20,7 +25,15 @@ const styles = StyleSheet.create({
       fontSize: 10,
       width: "80px",
       textAlign: "right",
-    }
+    } 
+
+
+
+
+
+
+
+    
   });
   
   // Update the summary section in both pages:
