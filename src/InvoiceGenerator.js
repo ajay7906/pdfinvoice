@@ -110,27 +110,6 @@ const styles = StyleSheet.create({
 
 
 
-  // summary: {
-  //   fontSize: 10,
-  //   marginTop: 20,
-  //   lineHeight: 1.5,
-  //   marginLeft: "12cm",
-  // },
-  // row: {
-  //   flexDirection: "row",
-  //   justifyContent: "flex-start",
-  //   marginBottom: 5,
-
-    
-  // },
-  // label: {
-  //   fontSize: 10,
-  //   marginRight: 80,
-  // },
-  // value: {
-  //   fontSize: 10,
-  // },
-
 
 
 
@@ -310,23 +289,6 @@ const InvoicePDF = ({ data, summary }) => {
           <> 
 
 
-{/* 
-            <View style={styles.summary}>
-              <View style={styles.row}>
-                <Text style={styles.label}>Sub Total:</Text>
-                <Text style={styles.value}>${summary.subTotal}</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Tax (10%):</Text>
-                <Text style={styles.value}>${summary.tax}</Text>
-              </View>
-              <View style={styles.divider} />
-              <View style={styles.row}>
-                <Text style={styles.label}>Grand Total:</Text>
-                <Text style={styles.value}>${summary.grandTotal}</Text>
-              </View>
-            </View>  */} 
-
 
 
 <View style={styles.summary}>
@@ -409,21 +371,7 @@ const InvoicePDF = ({ data, summary }) => {
             ))}
           </View>
 
-          {/* <View style={styles.summary}>
-            <View style={styles.row}>
-              <Text style={styles.label}>Sub Total:</Text>
-              <Text style={styles.value}>${summary.subTotal}</Text>
-            </View>
-            <View style={styles.row}>
-              <Text style={styles.label}>Tax (10%):</Text>
-              <Text style={styles.value}>${summary.tax}</Text>
-            </View>
-            <View style={styles.divider} />
-            <View style={styles.row}>
-              <Text style={styles.label}>Grand Total:</Text>
-              <Text style={styles.value}>${summary.grandTotal}</Text>
-            </View>
-          </View> */}  
+       
 
 <View style={styles.summary}>
     <View style={styles.row}>
